@@ -25,22 +25,37 @@
 // ENOENT: no such file or directory, open 'blah.txt'                      //
 // ======================================================================= //
 
+// var fs = require('fs');
+// var readline = require('readline');
+
+// var rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
+
+// rl.question('filename: ', function(filename) {
+//     rl.close();
+
+//     fs.readFile(filename, 'utf-8', function(error, data) {
+//         if (error) {
+//             console.log(error.message);
+//             return;
+//         }
+//         console.log(data.toUpperCase());
+//     });
+// });
+
+// ---------------------------------------------------- //
+//              Without Readline Interface              //
+// ---------------------------------------------------- //
+
 var fs = require('fs');
-var readline = require('readline');
+filename = 'file1.txt';
 
-var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-rl.question('filename: ', function(filename) {
-    rl.close();
-
-    fs.readFile(filename, 'utf-8', function(error, data) {
-        if (error) {
-            console.log(error.message);
-            return;
-        }
-        console.log(data.toUpperCase());
-    });
+fs.readFile(filename, 'utf-8', function(error, data) {
+    if (error) {
+        console.log(error.message);
+        return;
+    }
+    console.log(data.toUpperCase());
 });
