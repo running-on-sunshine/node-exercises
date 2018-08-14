@@ -25,58 +25,79 @@
 // properly displayed.                                                     //
 // ======================================================================= //
 
-var fs = require('fs');
-var readline = require('readline');
+// var fs = require('fs');
+// var readline = require('readline');
 
-var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// var rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
 
-rl.question('Input file: ', function(input) {
-    rl.question('Output file: ', function(output) {
-        rl.close();
+// rl.question('Input file: ', function(input) {
+//     rl.question('Output file: ', function(output) {
+//         rl.close();
 
-        fs.readFile(input, 'utf-8', function(inputError, data) {
-            if (inputError) {
-                console.log(inputError.message);
-                return;
-            }
+//         fs.readFile(input, 'utf-8', function(inputError, data) {
+//             if (inputError) {
+//                 console.log(inputError.message);
+//                 return;
+//             }
 
-            fs.writeFile(output, data.toUpperCase(), function(outputError) {
-                if (outputError) {
-                    console.log(outputError.message);
-                    return;
-                }
-                console.log(`Wrote to file ${output}`);
-            });
-        });
-    });
-});
+//             fs.writeFile(output, data.toUpperCase(), function(outputError) {
+//                 if (outputError) {
+//                     console.log(outputError.message);
+//                     return;
+//                 }
+//                 console.log(`Wrote to file ${output}`);
+//             });
+//         });
+//     });
+// });
 
 // ------------------------------------------------------------------- //
 //                      Without Readline Interface                     //
 // ------------------------------------------------------------------- //
 
+// var fs = require('fs');
+// var inputFile = 'file1.txt';
+// var outputFile = 'output.txt';
+
+// fs.readFile(inputFile, 'utf-8', function(error, data) {
+//     console.log(`Input file: ${inputFile}`);
+
+//     if (error) {
+//         console.log(error.message);
+//         return;
+//     }
+
+//     fs.writeFile(outputFile, data.toUpperCase(), function(error) {
+//         console.log(`Output file: ${outputFile}`);
+        
+//         if (error) {
+//             console.log(error.message);
+//             return;
+//         }
+//         console.log(`Wrote to file ${outputFile}`);
+//     });
+// });
+
+// ---------------------------------------------------- //
+//                    With Promises                     //
+// ---------------------------------------------------- //
+
 var fs = require('fs');
-var inputFile = 'file1.txt';
+var promisify = require('util').promisify;
+var readFile = promisify(fs.readFile);
+var writeFile = promisify(fs.writeFile);
+var inputFile = 'file2.txt';
 var outputFile = 'output.txt';
 
-fs.readFile(inputFile, 'utf-8', function(error, data) {
-    console.log(`Input file: ${inputFile}`);
-
-    if (error) {
-        console.log(error.message);
-        return;
-    }
-
-    fs.writeFile(outputFile, data.toUpperCase(), function(error) {
-        console.log(`Output file: ${outputFile}`);
-        
-        if (error) {
-            console.log(error.message);
-            return;
-        }
-        console.log(`Wrote to file ${outputFile}`);
-    });
+readFile(inputFile)
+    .then(function(data) {
+        var toString = data.toString();
+        var uppercase = toString.toUpperCase();
+        writeFile(outputFile, uppercase)
+        .then(function() {
+            console.log(`Wrote to file ${outputFile}`);
+        });
 });
