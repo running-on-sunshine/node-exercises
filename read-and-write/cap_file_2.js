@@ -89,7 +89,7 @@ var fs = require('fs');
 var promisify = require('util').promisify;
 var readFile = promisify(fs.readFile);
 var writeFile = promisify(fs.writeFile);
-var inputFile = 'file2.txt';
+var inputFile = 'file1.txt';
 var outputFile = 'output.txt';
 
 readFile(inputFile)
