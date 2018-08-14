@@ -53,3 +53,30 @@ rl.question('Input file: ', function(input) {
         });
     });
 });
+
+// ------------------------------------------------------------------- //
+//                      Without Readline Interface                     //
+// ------------------------------------------------------------------- //
+
+var fs = require('fs');
+var inputFile = 'file1.txt';
+var outputFile = 'output.txt';
+
+fs.readFile(inputFile, 'utf-8', function(error, data) {
+    console.log(`Input file: ${inputFile}`);
+
+    if (error) {
+        console.log(error.message);
+        return;
+    }
+
+    fs.writeFile(outputFile, data.toUpperCase(), function(error) {
+        console.log(`Output file: ${outputFile}`);
+        
+        if (error) {
+            console.log(error.message);
+            return;
+        }
+        console.log(`Wrote to file ${outputFile}`);
+    });
+});
