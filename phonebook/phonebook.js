@@ -1,7 +1,7 @@
 var fs = require('fs');
 var readline = require('readline');
 var phonebookFile = "phonebook.json";
-var phonebook = {};
+var phonebook;
 
 var rl = readline.createInterface ({
     input: process.stdin,
@@ -24,9 +24,11 @@ var createMenu = function () {
 };
 
 var readPhoneFile = function () {
-    fs.readFile(phonebookFile, 'utf-8', function(data) {
+    fs.readFile(phonebookFile, 'utf-8', function(error, data) {
         if (data !== "") {
             phonebook = JSON.parse(data);
+        } else {
+            phonebook = {};
         }
         main();
     });
@@ -51,6 +53,18 @@ var main = function () {
         if (input === "5") {
             goodbye();
         }
+    });
+};
+
+var lookupEntry = function () {
+    rl.question("Name: ", function(name) {
+        if (phonebook.hasOwnProperty(name)) {
+            console.log(`Found entry for ${name}:${phonebook[name]}`);
+        }
+        else {
+            console.log(`No entry found for ${name}`);
+        }
+        main();
     });
 };
 
