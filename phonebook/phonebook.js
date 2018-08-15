@@ -91,6 +91,13 @@ var deleteEntry = function () {
     });
 };
 
+var listAllEntries = function () {
+    for (var name in phonebook) {
+        console.log(`${name}: ${phonebook[name]}`);
+    }
+    main();
+};
+
 var goodbye = function () {
     console.log("Bye!");
     fs.writeFile(phonebookFile, JSON.stringify(phonebook), function() {
