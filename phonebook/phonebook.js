@@ -59,7 +59,7 @@ var main = function () {
 var lookupEntry = function () {
     rl.question("Name: ", function(name) {
         if (phonebook.hasOwnProperty(name)) {
-            console.log(`Found entry for ${name}:${phonebook[name]}`);
+            console.log(`Found entry for ${name}: ${phonebook[name]}`);
         }
         else {
             console.log(`No entry found for ${name}`);
@@ -75,6 +75,19 @@ var setEntry = function () {
             console.log(`Entry stored for ${name}`);
             main();
         });
+    });
+};
+
+var deleteEntry = function () {
+    rl.question("Name: ", function(name) {
+        if (phonebook.hasOwnProperty(name)) {
+            console.log(`Deleted entry for ${name}: ${phonebook[name]}`);
+            delete phonebook[name];
+        }
+        else {
+            console.log(`No entry found for ${name}`);
+        }
+        main();
     });
 };
 
