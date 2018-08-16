@@ -1,14 +1,14 @@
-var fs = require('fs');
-var readline = require('readline');
-var phonebookFile = "phonebook.json";
-var phonebook;
+const fs = require('fs');
+const readline = require('readline');
+let phonebookFile = "phonebook.json";
+let phonebook;
 
-var rl = readline.createInterface ({
+const rl = readline.createInterface ({
     input: process.stdin,
     output: process.stdout
 });
 
-var menu = 
+let menu = 
 `
 Electronic Phone Book
 =====================
@@ -19,11 +19,11 @@ Electronic Phone Book
 5. Quit
 `;
 
-var createMenu = function () {
+let createMenu = function () {
     console.log(menu);
 };
 
-var readPhoneFile = function () {
+let readPhoneFile = function () {
     fs.readFile(phonebookFile, 'utf-8', function(error, data) {
         if (data !== "") {
             phonebook = JSON.parse(data);
@@ -35,7 +35,7 @@ var readPhoneFile = function () {
 };
 readPhoneFile();
 
-var main = function () {
+let main = function () {
     createMenu();
     rl.question("What would you like to do? ", function(input) {
         if (input === "1") {
@@ -56,7 +56,7 @@ var main = function () {
     });
 };
 
-var lookupEntry = function () {
+let lookupEntry = function () {
     rl.question("Name: ", function(name) {
         if (phonebook.hasOwnProperty(name)) {
             console.log(`Found entry for ${name}: ${phonebook[name]}`);
@@ -68,7 +68,7 @@ var lookupEntry = function () {
     });
 };
 
-var setEntry = function () {
+let setEntry = function () {
     rl.question("Name: ", function(name) {
         rl.question("Phone Number: ", function(phoneNumber) {
             phonebook[name] = phoneNumber;
@@ -78,7 +78,7 @@ var setEntry = function () {
     });
 };
 
-var deleteEntry = function () {
+let deleteEntry = function () {
     rl.question("Name: ", function(name) {
         if (phonebook.hasOwnProperty(name)) {
             console.log(`Deleted entry for ${name}: ${phonebook[name]}`);
@@ -91,14 +91,14 @@ var deleteEntry = function () {
     });
 };
 
-var listAllEntries = function () {
+let listAllEntries = function () {
     for (var name in phonebook) {
         console.log(`${name}: ${phonebook[name]}`);
     }
     main();
 };
 
-var goodbye = function () {
+let goodbye = function () {
     console.log("Bye!");
     fs.writeFile(phonebookFile, JSON.stringify(phonebook), function() {
         process.exit();
