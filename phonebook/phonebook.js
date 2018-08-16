@@ -19,12 +19,12 @@ Electronic Phone Book
 5. Quit
 `;
 
-let createMenu = function () {
+let createMenu = () => {
     console.log(menu);
 };
 
-let readPhoneFile = function () {
-    fs.readFile(phonebookFile, 'utf-8', function(error, data) {
+let readPhoneFile = () => {
+    fs.readFile(phonebookFile, 'utf-8', (error, data) => {
         if (data !== "") {
             phonebook = JSON.parse(data);
         } else {
@@ -35,9 +35,9 @@ let readPhoneFile = function () {
 };
 readPhoneFile();
 
-let main = function () {
+let main = () => {
     createMenu();
-    rl.question("What would you like to do? ", function(input) {
+    rl.question("What would you like to do? ", (input) => {
         if (input === "1") {
             lookupEntry();
         }
@@ -56,8 +56,8 @@ let main = function () {
     });
 };
 
-let lookupEntry = function () {
-    rl.question("Name: ", function(name) {
+let lookupEntry = () => {
+    rl.question("Name: ", (name) => {
         if (phonebook.hasOwnProperty(name)) {
             console.log(`Found entry for ${name}: ${phonebook[name]}`);
         }
@@ -68,9 +68,9 @@ let lookupEntry = function () {
     });
 };
 
-let setEntry = function () {
-    rl.question("Name: ", function(name) {
-        rl.question("Phone Number: ", function(phoneNumber) {
+let setEntry = () => {
+    rl.question("Name: ", (name) => {
+        rl.question("Phone Number: ", (phoneNumber) => {
             phonebook[name] = phoneNumber;
             console.log(`Entry stored for ${name}`);
             main();
@@ -78,8 +78,8 @@ let setEntry = function () {
     });
 };
 
-let deleteEntry = function () {
-    rl.question("Name: ", function(name) {
+let deleteEntry = () => {
+    rl.question("Name: ", (name) => {
         if (phonebook.hasOwnProperty(name)) {
             console.log(`Deleted entry for ${name}: ${phonebook[name]}`);
             delete phonebook[name];
@@ -91,16 +91,16 @@ let deleteEntry = function () {
     });
 };
 
-let listAllEntries = function () {
+let listAllEntries = () => {
     for (var name in phonebook) {
         console.log(`${name}: ${phonebook[name]}`);
     }
     main();
 };
 
-let goodbye = function () {
+let goodbye = () => {
     console.log("Bye!");
-    fs.writeFile(phonebookFile, JSON.stringify(phonebook), function() {
+    fs.writeFile(phonebookFile, JSON.stringify(phonebook), () => {
         process.exit();
     });
 };
