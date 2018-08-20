@@ -28,19 +28,22 @@ let readBody = (req, callback) => {
     });
 };
 
-const contactPrefix = '/contacts/';
+// const contactPrefix = '/contacts/';
 
 let getContacts = (req, res) => {
     res.end(JSON.stringify(contacts));
 };
 
-let getContact = (req, res) => {
-    let id = req.url.slice(contactPrefix.length);
+let getContact = (req, res, matches) => {
+    // let regEx = /^\/contacts\/([0-9]+)+$/;
+    // let id = route.url.exec(req.url)[1];
+    let id = matches[0];
     res.end(JSON.stringify(contacts[id]));
 };
 
-let deleteContact = (req, res) => {
-    let id = req.url.slice(contactPrefix.length);
+let deleteContact = (req, res, matches) => {
+    // let id = req.url.slice(contactPrefix.length);
+    let id = matches[0];
     delete contacts[id];
     res.end('Deleted contact successfully!');
 };
@@ -62,12 +65,12 @@ let notFound = (req, res) => {
 let routes = [
     {
         method: 'GET',
-        url: /^\/contacts\/[0-9]+$/,
+        url: /^\/contacts\/([0-9]+)$/,
         run: getContact
     },
     {
         method: 'DELETE',
-        url: /^\/contacts\/[0-9]+$/,
+        url: /^\/contacts\/([0-9]+)$/,
         run: deleteContact
     },
     {
@@ -89,10 +92,10 @@ let routes = [
 
 let server = http.createServer((req, res) => {
     let route = routes.find(route =>
-    req.url.startsWith(route.url) &&
-    req.method === route.method
+    route.url.test(req.url) && req.method === route.method
     );
-    route.run(req, res);
+    let matches = route.url.exec(req.url);
+    route.run(req, res, matches.slice(1));
 });
 
 server.listen(3000);
