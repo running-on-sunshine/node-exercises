@@ -46,7 +46,7 @@ const fs = require('fs');
 const url = 'https://en.wikipedia.org/wiki/Continuation-passing_style';
 const filename = 'output.html';
 
-let saveWebPage = function (url, filename, callback) {
+let saveWebPage = (url, filename, callback) => {
     request.get(url, function (error, response, html) {
         fs.writeFile(filename, html, function (error) {
             callback(error);
@@ -54,7 +54,7 @@ let saveWebPage = function (url, filename, callback) {
     });
 };
 
-saveWebPage(url, filename, function (error) {
+saveWebPage(url, filename, (error) => {
     if (error) {
         console.log(error.message);
     }
