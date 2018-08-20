@@ -1,0 +1,13 @@
+{
+  "name": "extract-a-function2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "extract_a_function2.js",
+  "dependencies": {
+    "gm": "^1.23.1"
+  },
+  "devDependencies": {},
+  "scripts": "",
+  "author": "",
+  "license": "ISC"
+}
