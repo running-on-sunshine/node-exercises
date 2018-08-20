@@ -4,9 +4,9 @@
 
 // Start below:
 
-// ======================================================================================= //
+// --------------------------------------------------------------------------------------- //
 // Given the following code:                                                               //
-//                                                                                         //
+// --------------------------------------------------------------------------------------- //                                                                                        //
 // const fs = require('fs');                                                               //
 // const gm = require('gm');                                                               //
 // const request = require('request');                                                     //
@@ -23,7 +23,7 @@
 //     console.log(err.message);                                                           //
 //     return;                                                                             //
 //   }                                                                                     //
-//                                                                                         //
+//                                                                                         //                                                                                        //
 //   fs.writeFile(filename, data, (err) => {                                               //
 //     if (err) {                                                                          //
 //       console.log(err.message);                                                         //
@@ -40,16 +40,20 @@
 //       });                                                                               //
 //   });                                                                                   //
 // });                                                                                     //
-//                                                                                         //
-// In order to run the above code you need to install:                                     //
-//                                                                                         //
-// Homebrew                                                                                //
-// graphicsmagick - brew install graphicsmagick                                            //
-// the gm module - npm install gm                                                          //
-//                                                                                         //
+// --------------------------------------------------------------------------------------- //
+
+//| ------------------------------------------------------------------------------------- |//
+//| In order to run the above code you need to install:                                   |//
+//| ------------------------------------------------------------------------------------- |//
+//| Homebrew                                                                              |//
+//| graphicsmagick - brew install graphicsmagick                                          |//
+//| the gm module - npm install gm                                                        |//
+//| ------------------------------------------------------------------------------------- |//
+
+// --------------------------------------------------------------------------------------- //
 // Extract a reusable function downloadAndCreateThumbnail(imageUrl, filename,              //
 // thumbnailFilename, callback). You should be able to use the function like so:           //
-//                                                                                         //
+// --------------------------------------------------------------------------------------- //
 // var url = 'https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png';      //
 // var filename = 'js-logo.png';                                                           //
 // var thumbnailFilename = 'js-logo-small.png';                                            //
@@ -59,8 +63,8 @@
 //     return;                                                                             //
 //   }                                                                                     //
 //   console.log('It worked');                                                             //
-// })                                                                                      //
-// ======================================================================================= //
+// });                                                                                      //
+// --------------------------------------------------------------------------------------- //
 
 const fs = require('fs');
 const gm = require('gm');
