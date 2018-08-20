@@ -1,0 +1,12 @@
+{
+  "name": "extract-a-function",
+  "version": "1.0.0",
+  "description": "",
+  "main": "extract_a_function.js",
+  "scripts": "",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
