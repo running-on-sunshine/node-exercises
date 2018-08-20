@@ -22,20 +22,20 @@
 // });                                                                     //
 // ======================================================================= //
 
-var gm = require('gm');
-var request = require('request');
-var resizedImageFile = 'JS-logo-resized.png';
-var options = {
+const gm = require('gm');
+const request = require('request');
+let resizedImageFile = 'JS-logo-resized.png';
+let options = {
       url: "https://raw.githubusercontent.com/voodootikigod/logo.js/master/js.png",                                //
       encoding: null    
 }; 
 
-request(options, function(error, response, imageData) {
+request(options, (error, response, imageData) => {
     if (error) {
         console.log(error.message);
         return;
     }
-    gm(imageData).resize(240, 240).write(resizedImageFile, function (error) {
+    gm(imageData).resize(240, 240).write(resizedImageFile, (error) => {
         if (error) {
             console.log(error.message);
         }
