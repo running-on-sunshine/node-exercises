@@ -46,20 +46,17 @@ const fs = require('fs');
 const url = 'https://en.wikipedia.org/wiki/Continuation-passing_style';
 const filename = 'output.html';
 
-let saveWebPage = function (url, filename) {
+let saveWebPage = function (url, filename, callback) {
     request.get(url, function (error, response, html) {
-        if (error) {
-            console.log(error.message);
-            return;
-        }
         fs.writeFile(filename, html, function (error) {
-            if (error) {
-                console.log(error.message);
-                return;
-            }
-            console.log('Web page saved!');
+            callback(error);
         });
     });
 };
 
-saveWebPage(url, filename);
+saveWebPage(url, filename, function (error) {
+    if (error) {
+        console.log(error.message);
+    }
+    console.log('Web page saved!');
+});
