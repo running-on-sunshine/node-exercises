@@ -79,7 +79,7 @@ let downloadAndCreateThumbnail = (imageUrl, filename, thumbnailFilename, callbac
         fs.writeFile(filename, data, (error) => {
             gm(filename).resize(240, 240).write(thumbnailFilename, (error) => {
                 callback(error);
-            })
+            });
         });
     });
 };
