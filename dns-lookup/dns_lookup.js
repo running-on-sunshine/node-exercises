@@ -15,39 +15,39 @@
 // error gets displayed.                                                   //
 // ======================================================================= //
 
-// var dns = require('dns');
-// var readline = require('readline');
+const dns = require('dns');
+const readline = require('readline');
 
-// var rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-// });
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-// rl.question('Domain name: ', function(domain) {
-//     rl.close();
+rl.question('Domain name: ', (domain) => {
+    rl.close();
 
-//     dns.lookup(domain, function(error, address) {
-//         if (error) {
-//             console.log(error.message);
-//             return;
-//         }
-//         console.log(`IP Address: ${address}`);
-//     });
-// });
+    dns.lookup(domain, (error, address) => {
+        if (error) {
+            console.log(error.message);
+            return;
+        }
+        console.log(`IP Address: ${address}`);
+    });
+});
 
 // ---------------------------------------------------- //
 //              Without Readline Interface              //
 // ---------------------------------------------------- //
 
-var dns = require('dns');
-var domainName = 'yahoo.com';
+// const dns = require('dns');
+// const domainName = 'yahoo.com';
 
-dns.lookup(domainName, function(error, address) {
-    console.log(`Domain name: ${domainName}`);
+// dns.lookup(domainName, (error, address) => {
+//     console.log(`Domain name: ${domainName}`);
     
-    if (error) {
-        console.log(error.message);
-        return;
-    }
-    console.log(`IP Address: ${address}`);
-});
+//     if (error) {
+//         console.log(error.message);
+//         return;
+//     }
+//     console.log(`IP Address: ${address}`);
+// });
