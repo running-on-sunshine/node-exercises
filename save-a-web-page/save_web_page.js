@@ -23,68 +23,41 @@
 // displayed.                                                              //
 // ======================================================================= //
 
-// var fs = require('fs');
-// var readline = require('readline');
-// var https = require('https');
+const fs = require('fs');
+const readline = require('readline');
+const https = require('https');
 
-// var rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-// });
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-// rl.question('URL: ', function(url) {
-//     rl.question('Save to file: ', function(filename) {
-//         console.log("I worked!");
-//         rl.close();
+let saveWebPage = () => {
+    rl.question('URL: ', (url) => {
+        rl.question('Save to file: ', (filename) => {
+            console.log("I worked!");
+            rl.close();
 
-//         https.get(url, function(response) {
-//             var webpageData = '';
-            
-//             response.on('data', function(chunkOfData) {
-//                 console.log("Yay! I've got some data");
-//                 webpageData += chunkOfData;
-//             });
+            https.get(url, (response) => {
+                var webpageData = '';
+                
+                response.on('data', (chunkOfData) => {
+                    console.log("Yay! I've got some data");
+                    webpageData += chunkOfData;
+                });
 
-//             response.on('end', function() {
-//                 fs.writeFile(filename, webpageData, function(error) {
-//                     if (error) {
-//                         console.log(error.message);
-//                         return;
-//                     }
-//                     console.log(`Saved to file ${filename}`);
-//                 });
-//             });
-//         });
-//     });
-// });
-
-// ----------------------------------------------------------------------------- //
-//                          Without Readline Interface                           //
-// ----------------------------------------------------------------------------- //
-
-var fs = require('fs');
-var https = require('https');
-var url = "https://css-tricks.com/creating-book-cover-using-javascript-p5-js/";
-var filename = "cover-book.html";
-
-https.get(url, function(response) {
-    console.log(`URL: ${url}`);
-    console.log(`Save to file: ${filename}`);
-
-    var webpageData = '';
-
-    response.on('data', function(chunkOfData) {
-        console.log("Yay! I've got some data");
-        webpageData += chunkOfData;
-    });
-
-    response.on('end', function() {
-        fs.writeFile(filename, webpageData, function(error) {
-            if (error) {
-                console.log(error.message);
-                return;
-            }
-            console.log(`Saved to file ${filename}`);
+                response.on('end', () => {
+                    fs.writeFile(filename, webpageData, (error) => {
+                        if (error) {
+                            console.log(error.message);
+                            return;
+                        }
+                        console.log(`Saved to file ${filename}`);
+                    });
+                });
+            });
         });
     });
-});
+};
+
+saveWebPage();
