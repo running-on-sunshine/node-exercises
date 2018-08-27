@@ -25,18 +25,18 @@
 // ENOENT: no such file or directory, open 'blah.txt'                      //
 // ======================================================================= //
 
-// var fs = require('fs');
-// var readline = require('readline');
+// const fs = require('fs');
+// const readline = require('readline');
 
-// var rl = readline.createInterface({
+// const rl = readline.createInterface({
 //     input: process.stdin,
 //     output: process.stdout
 // });
 
-// rl.question('filename: ', function(filename) {
+// rl.question('filename: ', (filename) => {
 //     rl.close();
 
-//     fs.readFile(filename, 'utf-8', function(error, data) {
+//     fs.readFile(filename, 'utf-8', (error, data) => {
 //         if (error) {
 //             console.log(error.message);
 //             return;
@@ -49,10 +49,10 @@
 //              Without Readline Interface              //
 // ---------------------------------------------------- //
 
-// var fs = require('fs');
-// filename = 'file1.txt';
+// const fs = require('fs');
+// let filename = 'file1.txt';
 
-// fs.readFile(filename, 'utf-8', function(error, data) {
+// fs.readFile(filename, 'utf-8', (error, data) => {
 //     if (error) {
 //         console.log(error.message);
 //         return;
@@ -64,14 +64,14 @@
 //                    With Promises                     //
 // ---------------------------------------------------- //
 
-var fs = require('fs');
-var promisify = require('util').promisify;
-var readFile = promisify(fs.readFile);
-var filename = 'file1.txt';
+const fs = require('fs');
+const promisify = require('util').promisify;
+const readFile = promisify(fs.readFile);
+const filename = 'file1.txt';
 
 readFile(filename)
-    .then(function(data) {
-    var toString = data.toString();
-    var uppercase = toString.toUpperCase();
+    .then((data) => {
+    let toString = data.toString();
+    let uppercase = toString.toUpperCase();
     console.log(uppercase);
 });
