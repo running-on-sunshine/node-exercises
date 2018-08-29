@@ -39,7 +39,7 @@ let saveWebPage = () => {
             rl.close();
 
             https.get(url, (response) => {
-                var webpageData = '';
+                let webpageData = '';
                 
                 response.on('data', (chunkOfData) => {
                     console.log("Yay! I've got some data");
